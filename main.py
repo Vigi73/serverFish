@@ -27,7 +27,7 @@ def fish_tank():
 
 while True:
     if "RF3.exe" in [p.name() for p in pu.process_iter()]:
-        print("Процесс запущен...")
+
         if fish := fish_tank():
             with open('log.txt', 'a', encoding='utf-8') as f:
                 print(fish, file=f)
