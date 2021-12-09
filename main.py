@@ -19,7 +19,7 @@ def fish_tank():
         img = bot.screenshot('my_screenshot.png', region=(x_value, y_value, 328, 150))
         answer = pytesseract.image_to_string(img, lang='rus').split('\n')[:4]
         bot.press('space')
-        bot.sleep(.1)
+        bot.sleep(.2)
         return answer
     else:
         pass
