@@ -1,6 +1,13 @@
 import psutil as pu
 import pyautogui as bot
 import pytesseract
+import ctypes
+
+ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
+
+main = ctypes.windll.user32.FindWindowW("main", None)
+ctypes.windll.user32.ShowWindow(main, 6)
+
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
 
@@ -30,11 +37,21 @@ tmp_fish = ""
 while True:
     if "RF3.exe" in [p.name() for p in pu.process_iter()]:
 
-        if fish := fish_tank():
-            if str(fish) != tmp_fish:
+        if ans := fish_tank():
+            if str(ans) != tmp_fish:
+                fish = ans[0]
+                width_f = ans[1].split(':')[1].split()[0].strip().replace(",", '.')
+                if "зачетная" in ans[1]:
+                    top = "зачетная"
+                else:
+                    top = "мелочь"
+                bait = ans[2].split(':')[1].strip()
+                base = ans[3].split(":")[1].split(',')[0].strip()
+                location = ans[3].split(":")[1].split(',')[1].strip()
+
                 with open('log.txt', 'a', encoding='utf-8') as f:
-                    print(fish, file=f)
-                tmp_fish = str(fish)
+                    print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}')
+                tmp_fish = str(ans)
 
     else:
         bot.alert('Запустите рыбалку')
