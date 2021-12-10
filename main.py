@@ -50,7 +50,7 @@ while True:
                 location = ans[3].split(":")[1].split(',')[1].strip()
 
                 with open('log.txt', 'a', encoding='utf-8') as f:
-                    print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}')
+                    print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}', file=f)
                 tmp_fish = str(ans)
 
     else:
