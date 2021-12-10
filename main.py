@@ -19,18 +19,22 @@ def fish_tank():
         img = bot.screenshot('my_screenshot.png', region=(x_value, y_value, 328, 150))
         answer = pytesseract.image_to_string(img, lang='rus').split('\n')[:4]
         bot.press('space')
-        bot.sleep(.2)
+        bot.sleep(.1)
         return answer
     else:
         pass
 
 
+tmp_fish = ""
+
 while True:
     if "RF3.exe" in [p.name() for p in pu.process_iter()]:
 
         if fish := fish_tank():
-            with open('log.txt', 'a', encoding='utf-8') as f:
-                print(fish, file=f)
+            if str(fish) != tmp_fish:
+                with open('log.txt', 'a', encoding='utf-8') as f:
+                    print(fish, file=f)
+                tmp_fish = str(fish)
 
     else:
         bot.alert('Запустите рыбалку')
