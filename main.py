@@ -3,10 +3,10 @@ import pyautogui as bot
 import pytesseract
 import ctypes
 
-ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
-
-main = ctypes.windll.user32.FindWindowW("main", None)
-ctypes.windll.user32.ShowWindow(main, 6)
+# ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
+#
+# main = ctypes.windll.user32.FindWindowW("main", None)
+# ctypes.windll.user32.ShowWindow(main, 6)
 
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
@@ -26,7 +26,7 @@ def fish_tank():
         img = bot.screenshot('my_screenshot.png', region=(x_value, y_value, 328, 150))
         answer = pytesseract.image_to_string(img, lang='rus').split('\n')[:4]
         bot.press('space')
-        bot.sleep(.1)
+        bot.sleep(.3)
         return answer
     else:
         pass
@@ -46,11 +46,19 @@ while True:
                 else:
                     top = "мелочь"
                 bait = ans[2].split(':')[1].strip()
-                base = ans[3].split(":")[1].split(',')[0].strip()
-                location = ans[3].split(":")[1].split(',')[1].strip()
+                try:
+                    base = ans[3].split(":")[1].split(',')[0].strip()
+                except IndexError:
+                    base = ""
+
+                try:
+                    location = ans[3].split(":")[1].split(',')[1].strip()
+                except IndexError:
+                    location = ""
 
                 with open('log.txt', 'a', encoding='utf-8') as f:
                     print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}', file=f)
+                    print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}')
                 tmp_fish = str(ans)
 
     else:
