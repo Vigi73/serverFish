@@ -39,13 +39,26 @@ while True:
 
         if ans := fish_tank():
             if str(ans) != tmp_fish:
-                fish = ans[0]
-                width_f = ans[1].split(':')[1].split()[0].strip().replace(",", '.')
-                if "зачетная" in ans[1]:
-                    top = "зачетная"
-                else:
-                    top = "мелочь"
-                bait = ans[2].split(':')[1].strip()
+                try:
+                    fish = ans[0]
+                except:
+                    fish = "error"
+                try:
+                    width_f = ans[1].split(':')[1].split()[0].strip().replace(",", '.')
+                except:
+                    width_f = "error"
+                try:
+                    if "зачетная" in ans[1]:
+                        top = "зачетная"
+                    else:
+                        top = "мелочь"
+                except:
+                    top = "error"
+
+                try:
+                    bait = ans[2].split(':')[1].strip()
+                except:
+                    bait = "error"
                 try:
                     base = ans[3].split(":")[1].split(',')[0].strip()
                 except IndexError:
