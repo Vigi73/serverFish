@@ -3,10 +3,10 @@ import pyautogui as bot
 import pytesseract
 import ctypes
 
-# ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
-#
-# main = ctypes.windll.user32.FindWindowW("main", None)
-# ctypes.windll.user32.ShowWindow(main, 6)
+ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
+
+main = ctypes.windll.user32.FindWindowW("main", None)
+ctypes.windll.user32.ShowWindow(main, 6)
 
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
@@ -58,7 +58,7 @@ while True:
 
                 with open('log.txt', 'a', encoding='utf-8') as f:
                     print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}', file=f)
-                    print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}')
+                    # print(f'{fish}; {width_f}; {top}; {bait}; {base}; {location}')
                 tmp_fish = str(ans)
 
     else:
