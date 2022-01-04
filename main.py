@@ -16,18 +16,19 @@ print(x, y)
 x = (x // 2) - 401
 y = (y // 2) - 320
 
-x_value = x + 25
+x_value = x + 22
 y_value = y + 40
 
 
 def fish_tank():
     global x, y, x_value, y_value
     if bot.locateOnScreen(r'img\tank.png', region=(x, y, x + 111, y + 36)):
-        img = bot.screenshot('my_screenshot.png', region=(x_value, y_value, 330, 158))
+        img = bot.screenshot('my_screenshot.png', region=(x_value, y_value, 330, 145))
         bot.sleep(.2)
-        answer = pytesseract.image_to_string(img, lang='rus').split('\n')[:4]
+        answer = pytesseract.image_to_string(img, config='--psm 6', lang='rus').split('\n')[:4]
         bot.press('space')
         bot.sleep(.2)
+        print(answer)
         return answer
     else:
         pass
@@ -81,6 +82,7 @@ while True:
                         err = 0
         except:
             pass
+
     else:
         bot.alert('Запустите рыбалку')
         break
