@@ -28,7 +28,7 @@ def fish_tank():
         answer = pytesseract.image_to_string(img, config='--psm 6', lang='rus').split('\n')[:4]
         bot.press('space')
         bot.sleep(.2)
-        print(answer)
+        #print(answer)
         return answer
     else:
         pass
