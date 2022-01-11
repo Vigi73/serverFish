@@ -6,7 +6,7 @@ import ctypes
 ctypes.windll.user32.ShowWindow(ctypes.windll.kernel32.GetConsoleWindow(), 6)
 
 main = ctypes.windll.user32.FindWindowW("main", None)
-ctypes.windll.user32.ShowWindow(main, 6)
+ctypes.windll.user32.ShowWindow(main, 4)
 
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files (x86)\Tesseract-OCR\tesseract.exe'
 
@@ -24,11 +24,12 @@ def fish_tank():
     global x, y, x_value, y_value
     if bot.locateOnScreen(r'img\tank.png', region=(x, y, x + 111, y + 36)):
         img = bot.screenshot('my_screenshot.png', region=(x_value, y_value, 330, 145))
-        bot.sleep(.2)
+        bot.sleep(.5)
         answer = pytesseract.image_to_string(img, config='--psm 6', lang='rus').split('\n')[:4]
+        bot.sleep(.5)
         bot.press('space')
-        bot.sleep(.2)
-        #print(answer)
+        # bot.sleep(.5)
+        print(answer)
         return answer
     else:
         pass
@@ -81,7 +82,7 @@ while True:
                     else:
                         err = 0
         except:
-            pass
+            print('Что-то пошло не так :-(')
 
     else:
         bot.alert('Запустите рыбалку')
